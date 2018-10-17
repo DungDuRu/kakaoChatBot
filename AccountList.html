@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="AccountList.js"></script>
 </head>
 
 <body>
@@ -32,6 +33,18 @@
 
     <div class="container" style="margin-top:30px">
         <div class="row">
+            <select class="custom-select" id="teamSelectBox">
+                <option selected>TEAM</option>
+                <option value="Director">Director</option>
+                <option value="CreativeTeam 1">CreativeTeam 1</option>
+                <option value="CreativeTeam 2">CreativeTeam 2</option>
+                <option value="CreativeTeam 3">CreativeTeam 3</option>
+                <option value="CreativeTeam 4">CreativeTeam 4</option>
+                <option value="Medical Contents">Medical Contents</option>
+                <option value="Digital Destroyers">Digital Destroyers</option>
+            </select>
+        </div>
+        <div class="row" style="margin-top:20px">
 
 
             <div class="col-md-12">
@@ -48,61 +61,7 @@
                             <th>부서</th>
                             <th>포지션</th>
                         </thead>
-                        <tbody>
-
-                            <tr>
-
-                                <td>Mohsin</td>
-                                <td>Irshad</td>
-                                <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                                <td>isometric.mohsin@gmail.com</td>
-                                <td>+923335586757</td>
-                            </tr>
-
-                            <tr>
-
-                                <td>Mohsin</td>
-                                <td>Irshad</td>
-                                <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                                <td>isometric.mohsin@gmail.com</td>
-                                <td>+923335586757</td>
-                            </tr>
-
-
-                            <tr>
-
-                                <td>Mohsin</td>
-                                <td>Irshad</td>
-                                <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                                <td>isometric.mohsin@gmail.com</td>
-                                <td>+923335586757</td>
-                            </tr>
-
-
-
-                            <tr>
-
-                                <td>Mohsin</td>
-                                <td>Irshad</td>
-                                <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                                <td>isometric.mohsin@gmail.com</td>
-                                <td>+923335586757</td>
-                            </tr>
-
-
-                            <tr>
-
-                                <td>Mohsin</td>
-                                <td>Irshad</td>
-                                <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                                <td>isometric.mohsin@gmail.com</td>
-                                <td>+923335586757</td>
-                            </tr>
-
-
-
-
-
+                        <tbody id="tableBody">
                         </tbody>
 
                     </table>
@@ -111,7 +70,106 @@
 
             </div>
         </div>
+        <div class="row">
+            <form id="form" name="form" method="post" action="http://biz.moashot.com/EXT/URLASP/mssendUTF.asp">
+
+
+                <!-- =================================================================================================== -->
+                <!-- = 1. 사용자 정보 입력 START                                                                       = -->
+                <!-- = ----------------------------------------------------------------------------------------------- = -->
+                <!-- =    모아샷에서 발급받은 사용자 정보를 입력합니다.                                                = -->
+                <!-- = ----------------------------------------------------------------------------------------------- = -->
+                <!-- [필수] 사용자 인증 정보 -->
+                <input type="hidden" name="uid" value="innoboost" />
+                <input type="hidden" name="pwd" value="teamInno321" />
+
+                <input type="hidden" name="sendType" value="3" />
+
+                <table width="500" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="100">전송제목</td>
+                        <td width="400">
+                            <!-- [선택] 문자 전송제목 -->
+                            <input name="title" type="text" value="제목을 입력하세요" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>휴대폰번호</td>
+                        <td>
+                            <!-- [필수] 문자 수신처 번호(동보 전송일 경우 ,로 구분하여 입력) -->
+                            <input id="receiveNum" name="toNumber" type="text" value="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>전송내용</td>
+                        <td>
+                            <!-- [필수] 전송할 문자 내용 -->
+                            <textarea name="contents" cols="45" rows="5">문자로 전송할 내용을 입력하세요</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>발신자정보</td>
+                        <td>
+                            <!-- [필수] 발신자정보, 비즈모아샷에서 사전 등록한 발신번호만 입력                                 -->
+                            <!--        공란이거나 사전 등록하지 않은 발신번호 입력시 발송되지 않습니다.                       -->
+                            <input name="fromNumber" type="text" value="01099588734" />
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <td>전송시간</td>
+                        <td>
+                             [선택] 전송예약시간,  yyyymmddhhmiss(20160101093000) 14자리 예약시간을 입력                 
+                                    예약이 필요한 경우만 입력하며, 입력하지 않으면 접수 즉시 발송됩니다.                 
+                            <input name="startTime" type="text" value="" />
+                        </td>
+                    </tr> -->
+                </table>
+                <!-- = ----------------------------------------------------------------------------------------------- = -->
+                <!-- = 3. 전송할 정보 입력 END                                                                         = -->
+                <!-- =================================================================================================== -->
+
+                <!-- =================================================================================================== -->
+                <!-- = 4. 전송결과 처리 방식 입력 START                                                                = -->
+                <!-- = ----------------------------------------------------------------------------------------------- = -->
+                <!-- =    전송결과에 대한 처리 정보를 설정합니다.                                                      = -->
+                <!-- =    nType에 1을 넣는 경우 전송건에대한 모아샷에서의 접수여부를 전달,                             = -->
+                <!-- =            2를 넣는 경우 성공 실패여부를 전달,                                                  = -->
+                <!-- =            3를 넣는 경우 위 두가지 모두 전달합니다.                                             = -->
+                <!-- =    전송결과에서 전송해드리는 파라메터는 매뉴얼을 참고하시기 바랍니다.                           = -->
+                <!-- = ----------------------------------------------------------------------------------------------- = -->
+                <!--<input name="nType에" type="hidden" value="3" />-->
+                <!--<input name="indexCode" type="hidden" value="고객사에서 사용하는 고유값" />-->
+                <!--<input name="returnUrl" type="hidden" value="http://를 포함한 고객사의 호출URL" />-->
+                <!-- = ----------------------------------------------------------------------------------------------- = -->
+                <!-- = 4. 전송결과 처리 방식 입력 END                                                                  = -->
+                <!-- =================================================================================================== -->
+
+                <!-- =================================================================================================== -->
+                <!-- = 5. 전송후 처리 방식 입력 START                                                                  = -->
+                <!-- = ----------------------------------------------------------------------------------------------- = -->
+                <!-- =    전송요청 접수 후 처리 방식을 설정합니다.                                                     = -->
+                <!-- =    returnType에 0을 넣는 경우 호출한 모아샷 연동페이지를 닫습니다.(스크립트 self.close처리됨)   = -->
+                <!-- =                 1를 넣는 경우 호출한 모아샷 연동페이지를 그대로 유지합니다.                     = -->
+                <!-- =                 2를 넣는 경우 redirectUrl에 입력한 경로로 이동합니다.                           = -->
+                <!-- = ----------------------------------------------------------------------------------------------- = -->
+                <input name="returnType" type="hidden" value="2" />
+                <input name="redirectUrl" type="hidden" value="http://13.125.248.157/kakaoChatBot/AccountList.html" />
+                <!-- = ----------------------------------------------------------------------------------------------- = -->
+                <!-- = 5. 전송후 처리 방식 입력 END                                                                    = -->
+                <!-- =================================================================================================== -->
+
+                <table width="500" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td align="center">
+                            <!-- 모야삿 문자 전송 URL 에 form의 내용을 전송합니다. -->
+                            <input type="submit" name="button" value="문자발송" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     </div>
 </body>
-<script src="AccountList.js"></script>
+
+
 </html>
