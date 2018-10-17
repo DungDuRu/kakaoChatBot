@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const EmployeeList = [
+  var EmployeeList = [
     {
       name: "안경호",
       phone: "01031234491",
@@ -177,7 +177,6 @@ $(document).ready(function () {
   });
 
   const selectTeamBox = document.getElementById("teamSelectBox");
-  console.log(selectTeamBox);
 
   selectTeamBox.addEventListener("change", function () {
     const team = selectTeamBox.value;
